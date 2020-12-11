@@ -18,8 +18,11 @@ const orderRoutes = require("./routes/order");
 const stripeRoutes = require("./routes/stripePayment");
 
 //DB Connection
+
+const DATABASE = "mongodb+srv://dbUser:dbUser@cluster0.dbg1q.mongodb.net/dbUser?retryWrites=true&w=majority";
+
 mongoose
-  .connect(process.env.DATABASE, {
+  .connect(DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -44,6 +47,10 @@ app.use("/api", stripeRoutes);
 
 //PORT
 const port = process.env.PORT || 8000;
+
+app.get('/', (req, res) => {
+	res.send('Backend looks fine');
+});
 
 //Starting a server
 app.listen(port, () => {
